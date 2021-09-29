@@ -4,6 +4,8 @@
 const EventEmitter = require('events')
 const emitter = new EventEmitter()
 const moment = require('moment')
+require('moment-precise-range-plugin');
+
 
 moment.locale('ru')
 
@@ -33,12 +35,9 @@ function timer (str) {
     setTimeout(() => {
         
         console.clear()
-        let ms = (diff - 10800) * 1000 // почему то moment прибавляет 3 лишних часа при переводе времени, пока не разобралась
-                                       // с локалями отнимаю тут эти 3 часа
-        let date = moment(ms).format("HH:mm:ss")
-        
-        console.log(date)
-    
+
+        let timeLeft = moment(userDate).preciseDiff(now);
+        console.log(timeLeft);
        
         if (diff === 0) {
             console.clear()
